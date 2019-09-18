@@ -46,7 +46,10 @@ class Login extends React.Component {
     return (
       <div>
         {user ? null : (
-          <Heading size="medium">{this.getLoginText(loginState)}</Heading>
+          <Heading size="small" textAlign="center"> 📷 Welcome to the image uploader 🎉 </Heading>
+        )}
+        {user ? null : (
+          <Heading size="small">{this.getLoginText(loginState)}</Heading>
         )}
 
         {user

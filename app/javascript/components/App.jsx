@@ -165,16 +165,12 @@ class App extends React.Component {
             />
             {this.state.user && (
               <Box>
-                {this.state.uploading ? (
-                  <ReactLoading color="#7d4cdb" width={50} height={50} />
-                ) : (
-                  <MyDropzone
-                    user={this.state.user}
-                    uploading={uploading}
-                    fetchPhotos={() => this.fetchPhotos(this.state.user)}
-                    setUploading={uploading => this.setUploading(uploading)}
-                  />
-                )}
+                <MyDropzone
+                  user={this.state.user}
+                  uploading={uploading}
+                  fetchPhotos={() => this.fetchPhotos(this.state.user)}
+                  setUploading={uploading => this.setUploading(uploading)}
+                />
 
                 <Grid gap="small">
                   {this.state.photos.reverse().map(photo => (

@@ -1,6 +1,16 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
+import { Button } from "grommet";
+import styled from "styled-components";
+import ReactLoading from "react-loading";
+
+const DropzoneStyled = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+`;
 
 function MyDropzone({ setUploading, uploading, user, fetchPhotos }) {
   const onDrop = useCallback(files => {
@@ -48,15 +58,20 @@ function MyDropzone({ setUploading, uploading, user, fetchPhotos }) {
     };
 
     if (files.length) reader.readAsDataURL(files[0]);
-    // if (files.length) reader.readAsBinaryString(files[0]);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div {...getRootProps({ multiple: false, disabled: uploading })}>
-      <input {...getInputProps({ multiple: false, disabled: uploading })} />
-      <p>Drag 'n' drop some files here, or click to select files</p>
-    </div>
+    <DropzoneStyled className="DropzoneStyled">
+      {uploading ? (
+        <ReactLoading color="#7d4cdb" width={50} height={50} />
+      ) : (
+        <div {...getRootProps({ multiple: false, disabled: uploading })}>
+          <input {...getInputProps({ multiple: false, disabled: uploading })} />
+          <Button label="Upload your photos or drag them here!" />
+        </div>
+      )}
+    </DropzoneStyled>
   );
 }
 
