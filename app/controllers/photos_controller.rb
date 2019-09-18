@@ -43,8 +43,4 @@ class PhotosController < ApplicationController
   def photo_params
     params.require(:photo).permit(:base64_file, :name, :type, :user_id)
   end
-
-  def photo_params
-    params.require(:user).permit(:id)
-  end
 end
