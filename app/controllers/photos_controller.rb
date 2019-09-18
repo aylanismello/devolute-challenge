@@ -1,8 +1,4 @@
 # frozen_string_literal: true
-
-# require 'base64'
-require 'tempfile'
-
 class PhotosController < ApplicationController
   # https://s3.console.aws.amazon.com/s3/buckets/aylan/?region=us-west-2&tab=overview
   def create

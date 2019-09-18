@@ -22,18 +22,8 @@ function MyDropzone({ setUploading, uploading, user, fetchPhotos }) {
 
     reader.onload = () => {
       const dataUrl = reader.result;
-      // const base64_file = window.btoa(dataUrl);
       const base64_file = dataUrl;
-      // debugger;
-      console.log(base64_file);
-      // debugger;
       const loadedFile = files[0];
-      //       lastModified: 1548744455718
-      // lastModifiedDate: Tue Jan 29 2019 06:47:35 GMT+0000 (Western European Standard Time) {}
-      // name: "test_img.png"
-      // path: "test_img.png"
-      // size: 4186
-      // type: "image/png"
 
       setUploading(true);
       axios
@@ -47,13 +37,11 @@ function MyDropzone({ setUploading, uploading, user, fetchPhotos }) {
         })
         .then(success => {
           const { data } = success;
-          console.log(success);
           setUploading(false);
           fetchPhotos();
         })
         .catch(yo => {
           setUploading(false);
-          console.log(yo);
         });
     };
 

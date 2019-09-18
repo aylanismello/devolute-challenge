@@ -8,29 +8,9 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import App from '../components/App';
 
-class Hello extends React.Component {
-  
-  // componentWillMount() {
-  //   console.log('hello');
-  //   axios.post("/users/sign_in");
-  // }
-  
-  render() {
-    return <App />;
-  }
-}
-
-Hello.defaultProps = {
-  name: "David"
-};
-
-Hello.propTypes = {
-  name: PropTypes.string
-};
-
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    <App />,
     document.body.appendChild(document.createElement("div"))
   );
 });

@@ -14,25 +14,24 @@ const ContentBox = styled(Box)`
   margin: 0 auto;
 `;
 
+const MyGrid = styled.div`
+  grid-template-columns: repeat(3, auto);
+  display: grid;
+  grid-gap: 2rem;
+`;
+
 class App extends React.Component {
   state = Object.freeze({
     user: undefined,
     errors: [],
     uploading: false,
     loading: false,
+    // states: login, createUser, loggedIn
     loginState: "createUser",
     photos: [],
     // keyed in by ID
     photoDataUrls: {}
   });
-
-  // login, createUser, loggedIn
-
-  componentWillMount() {
-    console.log("hello");
-    // axios.post("/users/sign_in");
-    // this.createUser();
-  }
 
   login(user) {
     this.setState({ user });
@@ -45,7 +44,6 @@ class App extends React.Component {
         .get(photo.photo_url_full)
         .then(success => {
           const { data } = success;
-          console.log(success);
           const newPhotoDataUrl = {};
           newPhotoDataUrl[photo.id] = data;
 
@@ -54,7 +52,7 @@ class App extends React.Component {
           });
         })
         .catch(err => {
-          console.log(err);
+          this.logNewError(err);
         });
     });
   }
@@ -103,8 +101,8 @@ class App extends React.Component {
         this.login(data);
         this.setState({ loginState: "loggedIn " });
       })
-      .catch(yo => {
-        this.logNewError("problem seen");
+      .catch(err => {
+        this.logNewError(err);
       });
   }
 
@@ -121,15 +119,11 @@ class App extends React.Component {
         this.login(data);
         this.setState({ loginState: "loggedIn " });
       })
-      .catch(yo => {
-        this.logNewError("problem seen");
-        // console.log('failure')
-        // console.log(yo);
+      .catch(err => {
+        this.logNewError(err);
       });
   }
-
-  getIsLogin() {}
-
+  
   signOut() {
     this.setState({ user: undefined, loginState: "login" });
   }
@@ -172,7 +166,8 @@ class App extends React.Component {
                   setUploading={uploading => this.setUploading(uploading)}
                 />
 
-                <Grid gap="small">
+                <h4>My Images:</h4>
+                <MyGrid className="MyGrid">
                   {this.state.photos.reverse().map(photo => (
                     <Photo
                       id={photo.id}
@@ -180,7 +175,7 @@ class App extends React.Component {
                       src={this.state.photoDataUrls[photo.id]}
                     />
                   ))}
-                </Grid>
+                </MyGrid>
               </Box>
             )}
           </ContentBox>

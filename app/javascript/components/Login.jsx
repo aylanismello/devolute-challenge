@@ -61,8 +61,9 @@ class Login extends React.Component {
         ) : (
           <Form
             onSubmit={e => {
-              console.log("submit");
-              debugger;
+               loginState === "createUser"
+                 ? createUser(this.state.user)
+                 : postLogin(this.state.user);
             }}
           >
             <FormField label="email">
@@ -80,7 +81,6 @@ class Login extends React.Component {
             <FormField label="password">
               <TextInput
                 type="password"
-                placeholder="password"
                 value={this.state.user.password}
                 onChange={e =>
                   this.setState({
@@ -90,9 +90,6 @@ class Login extends React.Component {
               />
             </FormField>
 
-            {/* <input
-           
-            /> */}
             <Button
               label="Go"
               onClick={() => {
