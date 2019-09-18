@@ -4,18 +4,15 @@
 require 'tempfile'
 
 class PhotosController < ApplicationController
-
   # https://s3.console.aws.amazon.com/s3/buckets/aylan/?region=us-west-2&tab=overview
   def create
     file = photo_params[:base64_file]
     file_name = photo_params[:name]
-    tmp_file_path = PhotosHelper::save_tmp_img(file, file_name)
-
+    tmp_file_path = PhotosHelper.save_tmp_img(file, file_name)
 
     s3 = Aws::S3::Resource.new(region: 'us-west-2')
 
-  
-    obj = s3.bucket('aylan').object(PhotosHelper::get_obj_name(file_name))
+    obj = s3.bucket('aylan').object(PhotosHelper.get_obj_name(file_name))
     obj.upload_file(tmp_file_path)
     # obj.public_url
 
@@ -35,7 +32,13 @@ class PhotosController < ApplicationController
 
   def index
     # gets all user's picture
-    User.find(user_params[:id]).photos
+    user = User.find(user_params[:id])
+
+    if user
+      render json: { photos: user.photos }
+    else
+      render json: { error: 'wow' }, status: 422
+    end
   end
 
   private

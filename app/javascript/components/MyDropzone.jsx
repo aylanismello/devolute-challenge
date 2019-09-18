@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 
-function MyDropzone({ setUploading, uploading, user }) {
+function MyDropzone({ setUploading, uploading, user, fetchPhotos }) {
   const onDrop = useCallback(files => {
     // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
     const reader = new FileReader();
@@ -39,6 +39,7 @@ function MyDropzone({ setUploading, uploading, user }) {
           const { data } = success;
           console.log(success);
           setUploading(false);
+          fetchPhotos();
         })
         .catch(yo => {
           setUploading(false);

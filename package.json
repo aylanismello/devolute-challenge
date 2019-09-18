@@ -15,6 +15,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-dropzone": "^10.1.8",
+    "react-loading": "^2.0.3",
     "react-toastify": "^5.3.2",
     "react_ujs": "^2.6.0",
     "styled-components": "^4.3.2",
