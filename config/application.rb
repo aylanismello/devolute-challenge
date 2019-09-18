@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 # load dot env
-Dotenv::Railtie.load
+Dotenv::Railtie.load if !Rails.env.production?
 
 module DevoluteApp
   class Application < Rails::Application
